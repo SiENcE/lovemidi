@@ -1,0 +1,27 @@
+# Installation directories
+# System's libraries directory (where binary libraries are installed)
+LUA_LIBDIR= /usr/local/lib/lua/5.1
+# Lua includes directory
+LUA_INC= /usr/local/include
+
+# OS dependent
+# for Linux
+LIB_OPTION= -shared
+DEFS= -D__LINUX_ALSASEQ__
+LIBRARY= -lpthread -lasound
+
+# for MacOS X
+# LIB_OPTION= -bundle -undefined dynamic_lookup
+# DEFS= -D__MACOSX_CORE__
+# LIBRARY= -framework CoreMIDI -framework CoreFoundation -framework CoreAudio
+
+LIBNAME= $T.so.$V
+
+# Compilation directives
+WARN= -O2 -Wall -fPIC -W -Waggregate-return -Wcast-align -Wmissing-prototypes -Wnested-externs -Wshadow -Wwrite-strings -Wpointer-arith -pedantic
+INCS= -I$(LUA_INC)
+CFLAGS= $(WARN) $(INCS)
+OCFLAGS= -O2 -Wall $(INCS)
+CC= g++
+
+

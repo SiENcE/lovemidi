@@ -52,6 +52,8 @@ print( 'Play on device: ', midi.getOutPortName(device) )
 -- note, [vel], [channel] 
 out0:noteOn( 60, 100, outChannel)
 
+sleep(4)
+
 -- port, note, [vel], [channel]
 --midi.noteOn(0, 60, 50, 1)
 

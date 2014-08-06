@@ -36,25 +36,26 @@ local midi = require "luamidi"
 
 local device = 0
 local outChannel = 0
-local out0 = nil
 local outputports = midi.getoutportcount()
 local inputports = midi.getinportcount()
+local out0 = midi.openout(device)
+local outputdeveicename = midi.getOutPortName(device)
 
 function love.load()
 
 	print("Midi Output Ports: ", outputports)
-	if outputports > 0 then
+	if out0 and outputports > 0 then
 		table.foreach(midi.enumerateoutports(), print)
 		print()
 
-		out0 = midi.openout(device)
-		print( 'Play on device: ', midi.getOutPortName(device) )
-		
+		print( 'Play on device: ', outputdeveicename )
+
 		-- port, note, [vel], [channel]
 --		midi.noteOn(0, 60, 50, 1)
 
+		-- test tone
 		-- note, [vel], [channel]
-		out0:noteOn( 60, 50, 1 )
+		out0:noteOn( 60, 50, outChannel )
 
 		-- change Volume: command, control (0-127), value (0-127)
 		--out0:sendMessage( 176, 7, 100 )
@@ -71,13 +72,19 @@ function love.load()
 	end
 end
 
+-- current input nodes
+local a,b,c,d = nil
+
 function love.draw()
-    love.graphics.print('Hello World!', 400, 300)
+	love.graphics.print( 'Play on device: ' .. outputdeveicename, 200, 10 )
+
+	love.graphics.print( 'Input devices: ' .. inputports, 200, 100 )
+    love.graphics.print( 'Input', 200, 120)
+    love.graphics.print( 'Command: ' ..tostring(a) .. ' Note: ' .. tostring(b) .. ' Vel.: ' .. tostring(c) .. ' delta-time: ' .. tostring(d), 200, 140)
 end
 
-local a,b,c,d = nil
 function love.update(dt)
-	if out0 and inputports > 0 then
+	if out0 and inputports > 0 and outputports > 0 then
 		-- command, note, velocity, delta-time-to-last-event (just ignore)
 		a,b,c,d = midi.getMessage(0)
 		

@@ -3,12 +3,13 @@ lovemidi
 
 lovemidi is a project to give LÖVE a midi i/o interface. lovemidi is based on luamidi and rtmidi as interface library.
 
-LÖVE compatibility
-==================
+LÖVE/Lua compatibility
+======================
 
 * The current version is compatible with LÖVE 0.9.1, LÖVE 0.8.0, LÖVE 0.72 and Lua 5.1.x
 * For x86 choose luamidi.dll
 * For win64 choose luamidi.dll_64 and rename to luamidi.dll
+
 
 * The current binary is compiled with VS2012 (as LÖVE 0.9.1). Other LÖVE/Lua could bring different Visual Studios runtimes.
 * If the library does not work, you have to install the Visual Studio 2012 [Runtime](http://www.microsoft.com/en-US/download/details.aspx?id=30679).

@@ -10,9 +10,7 @@ LÖVE/Lua compatibility
 * For x86 choose luamidi.dll
 * For win64 choose luamidi.dll_64 and rename to luamidi.dll
 
-
-* The current binary is compiled with VS2012 (as LÖVE 0.9.1). Other LÖVE/Lua could bring different Visual Studios runtimes.
-* If the library does not work, you have to install the Visual Studio 2012 [Runtime](http://www.microsoft.com/en-US/download/details.aspx?id=30679).
+The current binary is compiled with VS2012 (as LÖVE 0.9.1). Other LÖVE/Lua could bring different Visual Studios runtimes. If the library does not work, you have to install the Visual Studio 2012 [Runtime](http://www.microsoft.com/en-US/download/details.aspx?id=30679).
 
 Example
 =======
@@ -78,5 +76,5 @@ Just add the right luamidi.dll (for LÖVE x86) or luamidi.dll_64 (rename to luami
 References
 ============
 
-lovemidi uses [luamidi](https://github.com/dwiel/luamidi) (older rtmidi, less compatibility)
-luamidi used [rtmidi](https://github.com/thestk/rtmidi) for cross platform midi compatibilty Linux/MacOSX/Windows
+* lovemidi uses [luamidi](https://github.com/dwiel/luamidi) (older rtmidi, less compatibility)
+* luamidi used [rtmidi](https://github.com/thestk/rtmidi) for cross platform midi compatibilty Linux/MacOSX/Windows

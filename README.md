@@ -73,6 +73,11 @@ Installation
 
 Just add the right luamidi.dll (for LÖVE x86) or luamidi.dll_64 (rename to luamidi.dll) (for LÖVE win64) to your project.
 
+TODO
+====
+
+Still todo is to update the current makefile to create binaries for linux and macosx.
+
 References
 ============
 

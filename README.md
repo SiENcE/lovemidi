@@ -17,7 +17,7 @@ Example
 =======
 
 Output (send Midi Data to Output-Port 0)
-```
+```lua
 -- initialize the library
 local midi = require "luamidi"
 
@@ -33,7 +33,7 @@ midi.gc()
 ```
 
 Input (receive Midi Data from Input-Port 0)
-```
+```lua
 -- initialize the library
 local midi = require "luamidi"
 

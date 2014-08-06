@@ -1,7 +1,7 @@
 lovemidi
 ========
 
-lovemidi is a project to give LÖVE a midi i/o interface. lovemidi is based on luamidi and rtmidi as interface library.
+lovemidi is a project to give LÖVE a midi i/o interface. lovemidi is based on luamidi and the newest rtmidi library.
 
 LÖVE/Lua compatibility
 ======================
@@ -78,5 +78,5 @@ Just add the right luamidi.dll (for LÖVE x86) or luamidi.dll_64 (rename to luami
 References
 ============
 
-lovemidi uses luamidi
-luamidi used rtmidi for cross platform midi compatibilty Linux/MacOSX/Windows
+lovemidi uses [luamidi](https://github.com/dwiel/luamidi) (older rtmidi, less compatibility)
+luamidi used [rtmidi](https://github.com/thestk/rtmidi) for cross platform midi compatibilty Linux/MacOSX/Windows

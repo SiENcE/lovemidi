@@ -85,12 +85,14 @@ function love.draw()
 	love.graphics.setColor(255,255,255)
 	love.graphics.print( 'Play on device: ' .. outputdeveicename, 200, 10 )
 
+	love.graphics.print( 'Press Q,W,E,R,T on your PC-Keyboard or connect a Midi-Keyboard to play Notes.', 200, 60 )
+
 	love.graphics.print( 'Input devices: ' .. inputports, 200, 100 )
     love.graphics.print( 'Input', 200, 120)
     love.graphics.print( 'Command: ' ..tostring(a) .. ' Note: ' .. tostring(b) .. ' Vel.: ' .. tostring(c) .. ' delta-time: ' .. tostring(d), 200, 140)
 	
-	love.graphics.setColor(a or 255,b or 255,c*2 or 255)
-	love.graphics.circle('fill', (b*6), 350, c/2 or 1, 25)
+	love.graphics.setColor(a or 255,b or 255,c or 255)
+	love.graphics.circle('fill', (b or 0)*6, 350, (c or 0)/2 or 1, 25)
 end
 
 function love.update(dt)

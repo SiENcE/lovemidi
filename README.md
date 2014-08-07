@@ -84,8 +84,11 @@ References
 * lovemidi uses [luamidi](https://github.com/dwiel/luamidi) (older rtmidi, less compatibility)
 * luamidi used [rtmidi](https://github.com/thestk/rtmidi) for cross platform midi compatibilty Linux/MacOSX/Windows
 
+
 License
 =======
+Copyright (c)'2014 Florian Fischer
+
 lovemidi uses the same license as rtMidi and luamidi (MIT)
 
 LEGAL AND ETHICAL:

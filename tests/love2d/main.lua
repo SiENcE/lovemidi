@@ -27,19 +27,32 @@
 
 
 -- Basic Midi Commands:
--- 144 - Node ON
--- 128 - Node OFF
--- 176 - change Volume [command, ?, vol (0-100)] 
--- 192 - Program change [command, patch-number]
--- midi notes from 21-108
+-- 144-159 - Node ON (for each of the 16 midi channels)
+-- 128-143 - Node OFF (for each of the 16 midi channels)
+-- 176-191 - Control Commands (for each of the 16 midi channels)
+-- 192-207 - Program change (for each of the 16 midi channels)
+
+-- Each channel can receive it's own node on, node off, ccomands and program changes
+-- You can play on as many output devices, and channels at the same time!
+
+-- Midi documentation
+-- http://computermusicresource.com/MIDI.Commands.html
+-- http://www.midi.org/techspecs/midispec.php
+-- http://rakarrack.sourceforge.net/midiic.html
+-- https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
+-- https://www.nyu.edu/classes/bello/FMT_files/9_MIDI_code.pdf
+
+-- CC comamands
+-- http://www.indiana.edu/~emusic/cntrlnumb.html
 
 local midi = require "luamidi"
 
 local inputports = midi.getinportcount()
 local indevicenumber = 0
+local in0 = nil
 
 local outputports = midi.getoutportcount()
-local outChannel = 1
+local outChannel = 1	-- (channels start with 0-15)
 local outdevicenumber = 0
 local out0 = midi.openout(outdevicenumber)
 local outputdeveicename = midi.getOutPortName(outdevicenumber)
@@ -49,6 +62,8 @@ function love.load()
 		print("Midi Input Ports: ", inputports)
 		table.foreach(midi.enumerateinports(), print)
 		print( 'Receiving on device: ', luamidi.getInPortName(indevicenumber))
+		-- not needed for this demo
+--		in0 = midi.openin(indevicenumber)
 	else
 		print("No Midi Input Ports found!")
 	end
@@ -60,18 +75,26 @@ function love.load()
 		print()
 		print( 'Play on device: ', outputdeveicename )
 
-		-- port, note, [vel], [channel]
---		midi.noteOn(0, 60, 100, 1)
+		-- change Program: 16 midi channels (192-207), program (0-127), - not used -
+		out0:sendMessage( 192+outChannel, 1, 0 )	-- on midi channel 1, change program to 1
 
-		-- test tone
-		-- note, [vel], [channel]
---		out0:noteOn( 60, 100, outChannel )
+		out0:sendMessage( 192+outChannel+1, 90, 0 )	-- on midi channel 2, change program to 120
 
-		-- change Volume: command, control (0-127), value (0-127)
---		out0:sendMessage( 176, 7, 100 )
 
-		-- change Program: command, program (0-127)
-		--out0:sendMessage( 192, 5 )
+		-- change Control Mode: 16 midi channels (176-191), control (0-127), control value (0-127)
+		out0:sendMessage( 176+outChannel, 7, 50)	-- on midi channel 1, change volume, to 80
+
+		----------------------------------------------------
+		-- Play notes using the following two possibilities:
+		----------------------------------------------------
+		
+		-- Play note: midi port, note, [vel], [channel]
+		midi.noteOn(0, 60, 100, outChannel) -- play on port 0, note 10, velocity 80, on midi channel 1
+
+		-- or
+		
+		-- Play note: note, [vel], [channel]
+		out0:noteOn( 10, 10, outChannel+1 ) -- play on choosen port out0, note 60, velocity 100, on channel outChannel
 	else
 		print("No Midi Output Ports found!")
 	end
@@ -101,12 +124,18 @@ function love.update(dt)
 		a,b,c,d = midi.getMessage(indevicenumber)
 		
 		if a ~= nil then
-			if a == 144 then
+			if a == 144 then	-- listen for Note On on First Midi Channel
 				print('Note turned ON:	', a, b, c, d)
 				out0:noteOn( b, c, outChannel )
-			elseif a == 128 then
+			elseif a == 128 then	-- listen for Note Off on First Midi Channel
 				print('Note turned OFF:', a, b, c, d)
 				out0:noteOff( b, c, outChannel )
+			elseif a == 176 then	-- if channel volume is changed
+				print('Channel Volume changed (Ch/Vol):', b, c)
+				out0:sendMessage( 176+outChannel, 7, c)
+			else
+				-- other messages
+				print('SYSTEM:', a,b,c,d)
 			end
 		end
 	end

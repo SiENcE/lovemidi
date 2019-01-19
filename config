@@ -1,8 +1,8 @@
 # Installation directories
 # System's libraries directory (where binary libraries are installed)
-LUA_LIBDIR= /usr/local/lib/lua/5.1
+LUA_LIBDIR= /usr/lib64/lua/5.1
 # Lua includes directory
-LUA_INC= /usr/local/include
+LUA_INC= /usr/include/lua-5.1
 
 # OS dependent
 # for Linux
@@ -23,5 +23,3 @@ INCS= -I$(LUA_INC)
 CFLAGS= $(WARN) $(INCS)
 OCFLAGS= -O2 -Wall $(INCS)
 CC= g++
-
-

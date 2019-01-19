@@ -9,7 +9,7 @@ OBJS= $(T).o rtmidi/build/librtmidi.so
 
 # lib: src/$(LIBNAME)
 
-%.o : src/%.cpp
+%.o : src/%.cpp rtmidi/RtMidi.h
 	$(CC) $(OCFLAGS) $(DEFS) -c $(<) -o $@
 
 src/$(LIBNAME) : $(OBJS)
@@ -24,9 +24,9 @@ clean:
 	rm -f src/$(LIBNAME) $(OBJS)
 	rm -rf rtmidi/build
 
-rtmidi/rtmidi.c:
+rtmidi/RtMidi.h:
 	git submodule update --init
 
-rtmidi/build/librtmidi.so: rtmidi/rtmidi.c
+rtmidi/build/librtmidi.so: rtmidi/rtmidi_c.cpp
 	mkdir -p rtmidi/build
 	cd rtmidi/build; cmake .. && make

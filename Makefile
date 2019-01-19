@@ -27,6 +27,6 @@ clean:
 rtmidi/RtMidi.h:
 	git submodule update --init
 
-rtmidi/build/librtmidi.so: rtmidi/rtmidi_c.cpp
+rtmidi/build/librtmidi.so: rtmidi/RtMidi.h
 	mkdir -p rtmidi/build
 	cd rtmidi/build; cmake .. && make

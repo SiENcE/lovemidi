@@ -5,7 +5,7 @@ CONFIG= ./config
 include $(CONFIG)
 
 SRC= $(T).cpp
-OBJS= $(T).o RtMidi.o
+OBJS= $(T).o rtmidi/build/librtmidi.so
 
 # lib: src/$(LIBNAME)
 
@@ -22,3 +22,11 @@ install: src/$(LIBNAME)
 
 clean:
 	rm -f src/$(LIBNAME) $(OBJS)
+	rm -rf rtmidi/build
+
+rtmidi/rtmidi.c:
+	git submodule update --init
+
+rtmidi/build/librtmidi.so: rtmidi/rtmidi.c
+	mkdir -p rtmidi/build
+	cd rtmidi/build; cmake .. && make

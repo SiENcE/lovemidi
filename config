@@ -20,6 +20,6 @@ LIBNAME= $T.so.$V
 # Compilation directives
 WARN= -O2 -Wall -fPIC -W -Waggregate-return -Wcast-align -Wmissing-prototypes -Wnested-externs -Wshadow -Wwrite-strings -Wpointer-arith -pedantic
 INCS= -I$(LUA_INC) -Irtmidi
-CFLAGS= $(WARN) $(INCS)
-OCFLAGS= -O2 -Wall $(INCS)
+CFLAGS= $(WARN) $(INCS) -fPIC
+OCFLAGS= -O2 -Wall $(INCS) -fPIC
 CC= g++

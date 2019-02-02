@@ -2,9 +2,9 @@
 # System's libraries directory (where binary libraries are installed)
 LUA_LIBDIR= /usr/lib64/lua/5.1
 
-# Lua includes directory
-LUA_INC= /usr/include/lua-5.1 # Fedora
-# LUA_INC= /usr/include/lua5.1 # Ubuntu
+# Lua include directory
+LUA_INC=-I/usr/include/lua-5.1 # Fedora
+LUA_INC+=-I/usr/include/lua5.1 # Ubuntu
 
 # OS dependent
 # for Linux

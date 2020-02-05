@@ -441,6 +441,14 @@ static int luamidi_getMessage(lua_State *L)
 		lua_pushnumber(L, delta);
 		return 4;
 	}
+	else if (message.size() == 2)
+	{
+		lua_pushnumber(L, message[0]);
+		lua_pushnumber(L, message[1]);
+		lua_pushnumber(L, 0);
+		lua_pushnumber(L, delta);
+		return 4;
+	}
 	return 0;
 }
 

@@ -45,6 +45,9 @@
 -- CC comamands
 -- http://www.indiana.edu/~emusic/cntrlnumb.html
 
+package.cpath = package.cpath .. ";src/?.dylib"
+
+
 local midi = require "luamidi"
 
 local inputports = midi.getinportcount()

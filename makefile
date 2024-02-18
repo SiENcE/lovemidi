@@ -1,11 +1,26 @@
 T= luamidi
-V= 0.1
-CONFIG= ./config
+V= 0.1a
+
+ifeq '$(findstring ;,$(PATH))' ';'
+    detected_OS := Windows
+else
+    detected_OS := $(shell uname 2>/dev/null || echo Unknown)
+    detected_OS := $(patsubst CYGWIN%,Cygwin,$(detected_OS))
+    detected_OS := $(patsubst MSYS%,MSYS,$(detected_OS))
+    detected_OS := $(patsubst MINGW%,MSYS,$(detected_OS))
+endif
+
+# default to the existing config.
+CONFIG=./config
+
+ifeq ($(detected_OS),Darwin)        # Mac OS X
+    CONFIG=./config.darwin
+endif
 
 include $(CONFIG)
 
 SRC= $(T).cpp
-OBJS= $(T).o RtMidi.o
+OBJS= $(T).o 
 
 # lib: src/$(LIBNAME)
 

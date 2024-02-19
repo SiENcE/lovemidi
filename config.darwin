@@ -3,21 +3,13 @@
 LUA_LIBDIR=./LuaJIT/lib/
 # Lua includes directory
 LUA_INC= ./LuaJIT/src/ 
-RTMIDI_INC= /opt/homebrew/Cellar/rtmidi/6.0.0/include/rtmidi
-RTMIDI_LIB= /opt/homebrew/Cellar/rtmidi/6.0.0/lib/
-
-
+RTMIDI_INC=./rtmidi/
 
 # OS dependent
-# for Linux
-#LIB_OPTION= -shared
-#DEFS= -D__LINUX_ALSASEQ__
-#LIBRARY= -lpthread -lasound
-
 # for MacOS X
-LIB_OPTION= -undefined dynamic_lookup  -dynamiclib  -undefined dynamic_lookup -fPIC  -lrtmidi 
+LIB_OPTION= -undefined dynamic_lookup  -dynamiclib  -undefined dynamic_lookup -fPIC 
 DEFS= -D__MACOSX_CORE__ -std=c++11 -mmacosx-version-min=11.0 
-LIBRARY= -framework CoreMIDI -framework CoreFoundation -framework CoreAudio -L$(RTMIDI_LIB) 
+LIBRARY= -framework CoreMIDI -framework CoreFoundation -framework CoreAudio
 
 LIBNAME= $T.dylib
 

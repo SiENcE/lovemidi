@@ -20,12 +20,15 @@ endif
 include $(CONFIG)
 
 SRC= $(T).cpp
-OBJS= $(T).o 
+OBJS= $(T).o RtMidi.o
 
-# lib: src/$(LIBNAME)
+all: $(OBJS) src/$(LIBNAME) 
 
 %.o : src/%.cpp
 	$(CC) $(OCFLAGS) $(DEFS) -c $(<) -o $@
+
+RtMidi.o:
+	$(CC) $(OCFLAGS) $(DEFS) $(LIB_OPTION) rtMidi/rtMidi.cpp -o RtMidi.o
 
 src/$(LIBNAME) : $(OBJS)
 	$(CC) $(CFLAGS) $(DEFS) $(LIB_OPTION) -o src/$(LIBNAME) $(OBJS) $(LIBRARY)

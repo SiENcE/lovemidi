@@ -28,4 +28,5 @@ CFLAGS= $(WARN) $(INCS)
 OCFLAGS= -O2 -Wall $(INCS)
 CC=clang
 
+export MACOSX_DEPLOYMENT_TARGET="10.3";
 

@@ -28,7 +28,7 @@ OBJS= $(T).o
 	$(CC) $(OCFLAGS) $(DEFS) -c $(<) -o $@
 
 src/$(LIBNAME) : $(OBJS)
-	export MACOSX_DEPLOYMENT_TARGET="10.3"; $(CC) $(CFLAGS) $(DEFS) $(LIB_OPTION) -o src/$(LIBNAME) $(OBJS) $(LIBRARY)
+	$(CC) $(CFLAGS) $(DEFS) $(LIB_OPTION) -o src/$(LIBNAME) $(OBJS) $(LIBRARY)
 
 install: src/$(LIBNAME)
 	mkdir -p $(LUA_LIBDIR)
